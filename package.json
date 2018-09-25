@@ -1,0 +1,11 @@
+{
+  "name": "badatmath",
+  "version": "0.0.1",
+  "description": "A test of initializing an empty project to use React and other javascript web components.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha ./tests"
+  },
+  "author": "RMA.Everest",
+  "license": "ISC"
+}
