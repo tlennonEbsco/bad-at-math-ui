@@ -1,10 +1,21 @@
 {
   "name": "badatmath",
   "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express": "^4.16.3",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-scripts": "1.1.5",
+    "whatwg-fetch": "^3.0.0"
+  },
   "description": "A test of initializing an empty project to use React and other javascript web components.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha ./tests"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   },
   "author": "RMA.Everest",
   "license": "ISC"
