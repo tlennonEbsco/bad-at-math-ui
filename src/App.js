@@ -1,6 +1,6 @@
 import React from 'react';
 import { FileWrapper} from './FileWrapper';
-import { UploadStatus } from './UploadStatus';
+import Upload from './Upload';
 export const defaultRoute = 'http://localhost:3001';
 
 class App extends React.Component {
@@ -11,7 +11,6 @@ class App extends React.Component {
       files: [],
       isLoading: false,
       error: null,
-      uploadStatus: null,
     }
   }
   
@@ -32,31 +31,9 @@ class App extends React.Component {
     .catch(error => this.setState({ error, isLoading:false}));
   }
 
-  uploadFile() {
-    var input = document.querySelector('input[type="file"]')
-
-    var data = new FormData()
-    data.append('sampleFile', input.files[0])
-
-    fetch(defaultRoute + '/upload', {
-      method: 'POST',
-      body: data,
-    }).then(response => {
-      if(response.ok) {
-        this.setState({
-          uploadStatus: 'successfully uploaded file.',
-        })
-      } else {
-        this.setState({
-          uploadStatus: 'unable to upload file.',
-        })
-      }
-    })
-
-  }
 
   render() {
-    const { files, isLoading, error, uploadStatus } = this.state;
+    const { files, isLoading, error } = this.state;
 
     if(error) {
       return <p>{error.message}</p>
@@ -66,22 +43,11 @@ class App extends React.Component {
       return <p>Loading...</p>
     }
 
-    let uploadStatusComp;
-
-    if(uploadStatus) {
-      console.log(uploadStatus);
-      uploadStatusComp = <UploadStatus message={this.state.uploadStatus.message} />
-    }
-
     return (
       <div>
         <FileWrapper files={files} route={defaultRoute}/>
 
-        <input type='file'></input>
-          <button className="submit" onClick={() => this.uploadFile()}>
-            Submit
-          </button>
-          {uploadStatusComp}
+        <Upload route={defaultRoute} />
       </div>
     );
   }
