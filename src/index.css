@@ -3,14 +3,23 @@ body {
   margin: 20px;
 }
 
-.red {
+.file {
   background-color:red;
   display: flex;
   width:100%;
   align-items: flex-start;
+  border: 1px black solid;
 }
 
-.green {
+.file-container {
+  background-color: yellow;
+}
+
+body .file:nth-of-type(n+2) {
+  border-top-width: 0px;
+}
+
+.file-name {
   background-color: greenyellow;
   flex:auto;
   text-overflow: ellipsis;
@@ -18,7 +27,7 @@ body {
   overflow: hidden;
 }
 
-.blue {
+.download-button {
   background-color: blue;
   align-self:center;
 }
