@@ -6,7 +6,7 @@ export function FileWrapper(props) {
         <div className='file-container'>
             <h3 className='header'>Available Files:</h3> 
             {props.files.map(file =>
-                <File fileLocation={file}/>
+                <File name={file} route={props.route}/>
             )}
         </div>
     );
