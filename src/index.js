@@ -1,14 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import { FileWrapper} from './FileWrapper';
 
-const defaultRoute = 'http://localhost:3001';
-
-function File(props) {
-  return (
-    <a href={defaultRoute + '/file/' + props.fileLocation}>Download</a>
-  );
-}
+export const defaultRoute = 'http://localhost:3001';
 
 class App extends React.Component {
   constructor(props) {
@@ -51,13 +46,7 @@ class App extends React.Component {
       console.log(response);
     })
   }
-  
-  renderFile(file){ 
-    return ( 
-      <File fileLocation={file}/>
-    )
-  }
-
+ 
   render() {
     const { files, isLoading, error } = this.state;
 
@@ -71,11 +60,7 @@ class App extends React.Component {
 
     return (
       <div>
-        <ul>
-          {files.map(file => 
-            this.renderFile(file)
-          )}
-        </ul>
+        <FileWrapper files={files} />
 
         <input type='file'></input>
           <button className="submit" onClick={() => this.uploadFile()}>
