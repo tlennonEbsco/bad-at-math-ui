@@ -1,7 +1,6 @@
 import React from 'react';
 import { FileWrapper} from './File/FileWrapper';
 import Upload from './Upload/Upload';
-import UploadStatus from './Upload/Message';
 export const defaultRoute = 'http://localhost:3001';
 
 class App extends React.Component {
@@ -12,15 +11,12 @@ class App extends React.Component {
       files: [],
       isLoading: false,
       error: null,
+      automaticReload: true,
     }
   }
   
-  componentDidMount() {
-    this.setState( {
-      isLoading: true
-    });
-
-    fetch(defaultRoute + '/file')
+  fetchFiles() {
+    fetch(`${defaultRoute}/file`)
     .then(response => {
       if(response.ok) {
         return response.json();
@@ -30,6 +26,21 @@ class App extends React.Component {
     })
     .then(data => { this.setState({files: data.files, isLoading: false}) })
     .catch(error => this.setState({ error, isLoading:false}));
+  }
+
+  componentDidMount() {
+    this.setState( {
+      isLoading: true
+    });
+
+    this.fetchFiles();
+
+    if(this.state.automaticReload) {
+      this.interval = setInterval(() => 
+
+        this.fetchFiles()
+      )
+    }
   }
 
 
@@ -50,6 +61,7 @@ class App extends React.Component {
         <FileWrapper files={files} route={defaultRoute}/>
 
         <Upload route={defaultRoute} />
+
       </div>
     );
   }
