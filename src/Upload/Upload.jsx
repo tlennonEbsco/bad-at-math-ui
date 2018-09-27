@@ -1,5 +1,5 @@
 import React from 'react';
-import UploadStatus from './UploadStatus';
+import UploadStatus from './Message';
 import style from './Upload.css';
 
 class Upload extends React.Component {
@@ -18,6 +18,7 @@ class Upload extends React.Component {
         if(input.files.length === 0) {
             this.setState({
                 status: 'Please select a file.',
+                type: 'error',
             });
             return;
         }
@@ -32,10 +33,12 @@ class Upload extends React.Component {
           if(response.ok) {
             this.setState({
               status: 'Successfully uploaded file.',
+              type: 'info',
             });
           } else {
             this.setState({
               status: 'Unable to upload file.',
+              type: 'warning',
             });
           }
         }) //TODO: Missing error handlers.
@@ -50,7 +53,13 @@ class Upload extends React.Component {
     render() {
         let status;
         if(this.state.status) {
-            status = <UploadStatus status={this.state.status} removeComponent={() => this.removeComponent()} fade={true}/>
+            status = <UploadStatus 
+                type={this.state.type} 
+                status={this.state.status} 
+                removeComponent={() => this.removeComponent()} 
+                fade={true}
+                fadeInterval={3000}
+            />
         }//TODO Hoist this up higher? Yes. I don't want it here. I want a status up top.
         
         return (
