@@ -67,6 +67,7 @@ class App extends React.Component {
         <FileWrapper files={files} route={this.state.route}/>
 
         <Upload route={this.state.route} />
+        
       </div>
     );
   }

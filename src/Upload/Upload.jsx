@@ -69,7 +69,6 @@ class Upload extends React.Component {
                 <input className='file-picker' type='file' />
                 <button className="submit" onClick={() => this.uploadFile()}>Submit</button>
 
-
                 <CSSTransitionGroup
                     transitionName="example"
                     transitionAppear={true}
