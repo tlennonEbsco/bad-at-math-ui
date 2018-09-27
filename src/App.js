@@ -1,5 +1,5 @@
 import React from 'react';
-import { FileWrapper} from './File/FileWrapper';
+import FileWrapper from './File/FileWrapper';
 import Upload from './Upload/Upload';
 export const defaultRoute = 'http://localhost:3001';
 
@@ -12,9 +12,10 @@ class App extends React.Component {
       isLoading: false,
       error: null,
       automaticReload: true,
+      fetchInterval: 5000,
     }
   }
-  
+
   fetchFiles() {
     fetch(`${defaultRoute}/file`)
     .then(response => {
@@ -38,11 +39,14 @@ class App extends React.Component {
     if(this.state.automaticReload) {
       this.interval = setInterval(() => 
 
-        this.fetchFiles()
+        this.fetchFiles(), this.state.fetchInterval
       )
     }
   }
 
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
 
   render() {
     const { files, isLoading, error } = this.state;
