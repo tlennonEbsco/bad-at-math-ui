@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './Message.css'
+import { CSSTransitionGroup } from 'react-transition-group' // ES6
 
 class Message extends React.Component {
     constructor(props) {
@@ -11,12 +12,15 @@ class Message extends React.Component {
             type: this.props.type ? this.props.type : null,
             fadeInterval: this.props.fadeInterval ? this.props.fadeInterval : 1500,
         };
+
     }
     
     componentDidMount() {
         if(this.state.fade) {
             this.interval = setInterval(() =>
-            this.state.removeComponent(), 
+            this.setState({
+                status: null,
+            }),
             this.state.fadeInterval);
         }
     }
@@ -26,13 +30,25 @@ class Message extends React.Component {
     }
 
     render() {  
-        const { type } = this.state;
-
+        const { type, status } = this.state;
+        
+        let statusMessage;
+        if(!status) {
+            statusMessage = null;
+        } else {
+            statusMessage = <h1 className={`message ${type}`}>{status}</h1>;
+        }
         return (
-            <div className={`message + ${type}`}>
-                {this.state.status}
-            </div>
-        );
+
+            <CSSTransitionGroup
+                transitionName="example"
+                transitionAppear={true}
+                transitionAppearTimeout={500}
+                transitionLeave={true}
+                transitionLeaveTimeout={1000}>
+                {statusMessage}
+            </CSSTransitionGroup>
+        )
     }
 }
 

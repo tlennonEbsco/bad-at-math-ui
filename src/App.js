@@ -1,6 +1,7 @@
 import React from 'react';
 import FileWrapper from './File/FileWrapper';
 import Upload from './Upload/Upload';
+import { bam }  from '../package.json'
 export const defaultRoute = 'http://localhost:3001';
 
 class App extends React.Component {
@@ -13,11 +14,13 @@ class App extends React.Component {
       error: null,
       automaticReload: true,
       fetchInterval: 5000,
+      route: `${bam.route}:${bam.port}`,
     }
   }
 
   fetchFiles() {
-    fetch(`${defaultRoute}/file`)
+    console.log(`Making a request to ${this.state.route}/file`)
+    fetch(`${this.state.route}/file`)
     .then(response => {
       if(response.ok) {
         return response.json();
@@ -62,10 +65,9 @@ class App extends React.Component {
     return (
       <div>
 
-        <FileWrapper files={files} route={defaultRoute}/>
+        <FileWrapper files={files} route={this.state.route}/>
 
-        <Upload route={defaultRoute} />
-
+        <Upload route={this.state.route} />
       </div>
     );
   }

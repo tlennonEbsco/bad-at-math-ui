@@ -7,7 +7,12 @@
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-scripts": "1.1.5",
+    "react-transition-group": "^1.2.1",
     "whatwg-fetch": "^3.0.0"
+  },
+  "bam": {
+    "route": "http://localhost",
+    "port": "3001"
   },
   "description": "A test of initializing an empty project to use React and other javascript web components.",
   "main": "index.js",
