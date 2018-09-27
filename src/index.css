@@ -25,8 +25,19 @@ body .file:nth-of-type(n+2) {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  padding-left: 10px;
 }
 
 .download-button {
   align-self:center;
+  padding-right: 10px;
+}
+
+.good {
+  background-color: greenyellow;
+  color: green;
+  border: 1px solid green;
+  padding: 10px;
+  font-size: 14px;
+  top:30px;
 }

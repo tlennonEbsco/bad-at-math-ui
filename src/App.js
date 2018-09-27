@@ -1,6 +1,7 @@
 import React from 'react';
 import { FileWrapper} from './File/FileWrapper';
 import Upload from './Upload/Upload';
+import UploadStatus from './Upload/UploadStatus';
 export const defaultRoute = 'http://localhost:3001';
 
 class App extends React.Component {
@@ -49,7 +50,8 @@ class App extends React.Component {
         <FileWrapper files={files} route={defaultRoute}/>
 
         <Upload route={defaultRoute} />
-        
+
+        <div className='good'>test</div>
       </div>
     );
   }

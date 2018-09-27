@@ -1,0 +1,22 @@
+.submit {
+    color:#0099CC;
+    text-transform: uppercase;
+    background-color:transparent;
+    border: 2px solid #0099CC;
+}
+
+.uploadContainer {
+  background-color: rgb(184, 228, 251);
+  margin-top: 20px;
+  display: flex;
+  border: 1px solid black;
+  padding: 10px;
+}
+
+.uploadContainer .submit {
+    flex: .5;
+}
+
+.uploadContainer .file-picker {
+    flex: auto;
+}
