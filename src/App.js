@@ -9,56 +9,18 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      files: [],
-      isLoading: false,
       error: null,
       automaticReload: true,
-      fetchInterval: 5000,
+      fetchInterval: 2000,
       route: `${bam.route}:${bam.port}`,
     }
   }
 
-  fetchFiles() {
-    fetch(`${this.state.route}/file`)
-    .then(response => {
-      if(response.ok) {
-        return response.json();
-      } else {
-        throw new Error('Something went wrong...');
-      }
-    })
-    .then(data => { this.setState({files: data.files, isLoading: false}) })
-    .catch(error => this.setState({ error, isLoading:false}));
-  }
-
-  componentDidMount() {
-    this.setState( {
-      isLoading: true
-    });
-
-    this.fetchFiles();
-
-    if(this.state.automaticReload) {
-      this.interval = setInterval(() => 
-
-        this.fetchFiles(), this.state.fetchInterval
-      )
-    }
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
-
   render() {
-    const { files, isLoading, error } = this.state;
+    const { files, error } = this.state;
 
     if(error) {
       return <p>{error.message}</p>
-    }
-
-    if(isLoading) {
-      return <p>Loading...</p>
     }
 
     return (

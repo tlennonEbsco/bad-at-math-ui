@@ -1,3 +1,40 @@
+
+.info {
+    background-color: greenyellow;
+    color: green;
+    border: 1px solid green;
+    padding: 10px;
+    font-size: 14px;
+  }
+  
+  .error {
+    background-color: lightcoral;
+    color: rgb(180, 0, 0);
+    border: 1px solid rgb(180, 0, 0);
+    padding: 10px;
+    font-size: 14px;
+  }
+  
+  .warning {
+    background-color: lightgoldenrodyellow;
+    color: orange;
+    border: 1px solid orange;
+    padding: 10px;
+    font-size: 14px;
+  }
+  
+  .message {
+    position: absolute;
+    z-index: 101;
+    top: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    overflow: hidden;
+    box-shadow: 0 0 5px black;
+  }
+
+  
 .status {
     width: 100px;
     -webkit-transition: 0.5s;

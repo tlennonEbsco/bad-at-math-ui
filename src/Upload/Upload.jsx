@@ -2,7 +2,7 @@ import React from 'react';
 import UploadStatus from './Message';
 import { CSSTransitionGroup } from 'react-transition-group' // ES6
 
-import style from './Upload.css';
+import './Upload.css';
 
 class Upload extends React.Component {
     constructor(props) {

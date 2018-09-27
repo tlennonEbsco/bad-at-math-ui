@@ -1,6 +1,5 @@
 import React from 'react';
-import styles from './Message.css'
-import { CSSTransitionGroup } from 'react-transition-group' // ES6
+import './Message.css'
 
 class Message extends React.Component {
     constructor(props) {

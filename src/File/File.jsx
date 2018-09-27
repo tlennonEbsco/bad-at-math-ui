@@ -1,12 +1,18 @@
 import React from 'react';
+import './File.css'
 
-export function File(props) {
-  return (
-    <div className='file'>
-        <p className='file-name'>{props.name}</p>
-        <a className='download-button' href={props.route + '/file/' + props.name}>
-            <img src={require('..\\download-32.png')} alt=''/>
-        </a>
-    </div>
-  );
+class File extends React.Component {
+
+
+  render() {
+    return (
+      <div className='file'>
+        <p className='file-name'> {this.props.name} </p>
+        <a className='download-button' href={`${this.props.route}/file/${this.props.name}`} >Download</a>
+        <span className='delete-button' onClick={() => this.deleteFile('test')}>Delete</span>
+      </div>
+    )
+  }
 }
+
+export default File;

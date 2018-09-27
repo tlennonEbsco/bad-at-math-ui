@@ -1,0 +1,49 @@
+.file:nth-of-type(odd) {
+    background-color: rgb(184, 228, 251);
+}
+
+.file:nth-of-type(even) {
+    background-color: rgb(190, 218, 245);
+}
+
+.file:nth-of-type(n+2) {
+    border-top-width: 0px;
+}
+
+.file {
+    display: flex;
+    width: 100%;
+    align-items: flex-start;
+    border: 1px black solid;
+    padding-right: 10px;
+}
+
+.file a, .file span {
+    line-height: 0;
+    font-size: 0;
+    color: transparent;
+}
+
+.file-name {
+    flex: auto;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    padding-left: 10px;
+}
+
+.download-button {
+    align-self: center;
+    background-image: url('..\\download-32.png');
+    background-size: 32px;
+    width: 32px;
+    height: 32px;
+}
+
+.delete-button {
+    align-self: center;
+    background-image: url('..\\delete.png');
+    background-size: 32px;
+    width: 32px;
+    height: 32px;
+}
