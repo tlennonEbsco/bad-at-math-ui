@@ -19,7 +19,6 @@ class App extends React.Component {
   }
 
   fetchFiles() {
-    console.log(`Making a request to ${this.state.route}/file`)
     fetch(`${this.state.route}/file`)
     .then(response => {
       if(response.ok) {

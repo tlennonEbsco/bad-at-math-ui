@@ -8,7 +8,6 @@ class FileWrapper extends React.Component {
 
         const setNextProps = new Set(nextProps.files);
         var difference = [...new Set([...this.props.files].filter(x => !setNextProps.has(x)))];
-        console.log(difference.length > 0 ? true : false);
         return difference.length > 0 ? true : false;
     }
 

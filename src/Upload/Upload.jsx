@@ -1,5 +1,7 @@
 import React from 'react';
 import UploadStatus from './Message';
+import { CSSTransitionGroup } from 'react-transition-group' // ES6
+
 import style from './Upload.css';
 
 class Upload extends React.Component {
@@ -56,7 +58,7 @@ class Upload extends React.Component {
             status = <UploadStatus 
                 type={this.state.type} 
                 status={this.state.status} 
-                removeComponent={() => this.removeComponent()} 
+                clearStatus={() => this.removeComponent()} 
                 fade={true}
                 fadeInterval={3000}
             />
@@ -66,7 +68,18 @@ class Upload extends React.Component {
             <div className='uploadContainer'>
                 <input className='file-picker' type='file' />
                 <button className="submit" onClick={() => this.uploadFile()}>Submit</button>
-                {status}                
+
+
+                <CSSTransitionGroup
+                    transitionName="example"
+                    transitionAppear={true}
+                    transitionAppearTimeout={500}
+                    transitionEnter={false}
+                    transitionLeave={true}
+                    transitionLeaveTimeout={500}>
+                    {status}       
+                </CSSTransitionGroup>
+
             </div>
         );
     }
