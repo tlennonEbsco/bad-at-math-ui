@@ -26,14 +26,16 @@ class FileWrapper extends React.Component {
             .catch(error => this.setState({ error, isLoading: false }));
     }
 
-    deleteFile(fileName, route) {
-        fetch(`${route}/file/delete/${fileName}`)
+    deleteFile(fileName) {
+        fetch(`${this.state.route}/file/${fileName}`, {method: "DELETE"})
             .then(response => {
                 if (response.ok) {
-                    console.log("successfully deleted the file.");
+                    this.setState({
+                        status: "successfully deleted the file.",
+                    });
                     this.fetchFiles();
                 } else {
-                    return response.json();
+                    throw new Error(`Unable to delete, ${fileName}`)
                 }
             }).then(parseError => {
                 console.log(parseError);
