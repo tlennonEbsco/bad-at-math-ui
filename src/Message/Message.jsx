@@ -6,24 +6,17 @@ class Message extends React.Component {
         super(props);
         this.state = {
             removeComponent: this.props.clearStatus,
-            status: this.props.status,
-            fade: this.props.fade ? this.props.fade : false,
-            type: this.props.type ? this.props.type : null,
+            message: this.props.status.message,
+            type: this.props.status.type,
             fadeInterval: this.props.fadeInterval ? this.props.fadeInterval : 1500,
         };
 
     }
     
     componentDidMount() {
-        if(this.state.fade) {
-            this.interval = setInterval(() =>
+        this.interval = setInterval(() =>
             this.state.removeComponent(),
             this.state.fadeInterval);
-        }
-
-        this.interval = setInterval(() =>
-        this.state.removeComponent(),
-        1500);
     }
 
     componentWillUnmount() {
@@ -31,9 +24,9 @@ class Message extends React.Component {
     }
 
     render() {  
-        const { type, status } = this.state;
+        const { type, message } = this.state;
         
-        return <h1 className={`message ${type}`}>{status}</h1>;
+        return <h1 className={`message ${type}`}>{message}</h1>;
     }
 }
 

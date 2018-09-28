@@ -10,9 +10,15 @@ class FileWrapper extends React.Component {
         this.state = {
             isLoading: true,
             route: this.props.route,
+            status: null,
         }
     }
-
+/*
+    status: {
+        message: 'message',
+        type: 'type'
+    }
+*/
     fetchFiles() {
         fetch(`${this.props.route}/file`)
             .then(response => {
@@ -31,7 +37,10 @@ class FileWrapper extends React.Component {
             .then(response => {
                 if (response.ok) {
                     this.setState({
-                        status: "successfully deleted the file.",
+                        status: {
+                            message: "successfully deleted the file.",
+                            type: 'info'
+                        },
                     });
                     this.fetchFiles();
                 } else {
@@ -47,8 +56,10 @@ class FileWrapper extends React.Component {
 
         if(input.files.length === 0) {
             this.setState({
-                status: 'Please select a file.',
-                type: 'error',
+                status: {
+                    message: 'Please select a file.',
+                    type: 'error',
+                }
             });
             return;
         }
@@ -62,14 +73,18 @@ class FileWrapper extends React.Component {
         }).then(response => {
           if(response.ok) {
             this.setState({
-              status: 'Successfully uploaded file.',
-              type: 'info',
+                status: {
+                    message: 'Successfully uploaded file.',
+                    type: 'info',
+                }
             });
             this.fetchFiles();
           } else {
             this.setState({
-              status: 'Unable to upload file.',
-              type: 'warning',
+              status: {
+                  message: 'Unable to upload file.',
+                type: 'warning',
+              }
             });
           }
         }) //TODO: Missing error handlers.
@@ -113,7 +128,6 @@ class FileWrapper extends React.Component {
                 type={this.state.type} 
                 status={this.state.status} 
                 clearStatus={() => this.clearStatus()} 
-                fade={true}
                 fadeInterval={3000}
             />
         }
