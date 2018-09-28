@@ -6,11 +6,11 @@
 }
 
 .uploadContainer {
-  background-color: rgb(184, 228, 251);
+  /* background-color: rgb(184, 228, 251); */
   margin-top: 20px;
   display: flex;
-  border: 1px solid black;
-  padding: 10px;
+  /* border: 1px solid black; */
+  /* padding: 10px; */
 }
 
 .uploadContainer .submit {
@@ -19,4 +19,31 @@
 
 .uploadContainer .file-picker {
     flex: auto;
+}
+
+.file-input {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.file-input + label {
+    font-size: 1.25em;
+    font-weight: 700;
+    display:inline-block;
+    cursor: hand;
+    color:#d3394c;
+    padding: 0.625rem 1.25rem;
+    border: 1px solid #d3394c;
+}
+
+label svg {
+    fill: currentColor;
+
+}
+.file-input + label,
+.file-input + label:hover {
 }

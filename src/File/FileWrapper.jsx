@@ -146,7 +146,6 @@ class FileWrapper extends React.Component {
 
                     <Upload route={this.state.route} parent={this}/>
 
-
                     <CSSTransitionGroup
                         transitionName='example'
                         transitionAppear={true}

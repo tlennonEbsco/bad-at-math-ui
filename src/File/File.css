@@ -12,17 +12,16 @@
 
 .file {
     display: flex;
-    width: 100%;
     align-items: flex-start;
     border: 1px black solid;
     padding-right: 10px;
 }
-
+/* 
 .file a, .file span {
     line-height: 0;
     font-size: 0;
     color: transparent;
-}
+} */
 
 .file-name {
     flex: auto;
@@ -31,19 +30,39 @@
     overflow: hidden;
     padding-left: 10px;
 }
-
+/* 
 .download-button {
     align-self: center;
-    background-image: url('..\\download-32.png');
-    background-size: 32px;
+    /* background-image: url('..\\download-32.png'); */
+    /* background-size: 32px; */
+    /* width: 32px; */
+    /* height: 32px; */
+    /* min-width:32px; */
+/* } */
+.download-button {
+    align-self: center;
+}
+
+.download-button .svg-icon {
     width: 32px;
     height: 32px;
+    fill: #0099CC;
+}
+
+.download-button .svg-icon path {
+    fill:#0099cc;
 }
 
 .delete-button {
     align-self: center;
-    background-image: url('..\\delete.png');
-    background-size: 32px;
+}
+.delete-button .svg-icon {
     width: 32px;
     height: 32px;
+}
+
+.delete-button .svg-icon rect, 
+.delete-button .svg-icon path,
+.delete-button .svg-icon polygon {
+    fill: #d3394c;
 }

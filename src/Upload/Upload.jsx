@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { FileIcon } from '../Svg/SvgFile'
 import './Upload.css';
 
 class Upload extends React.Component {
@@ -16,9 +16,15 @@ class Upload extends React.Component {
     render() {
         return (
             <div className='uploadContainer'>
-                <input className='file-picker' type='file' />
-                <button className="submit" onClick={() => this.state.parent.validateAndUpload()}>Submit</button>
-
+                    
+                <input name='file' id='file' type='file' className='file-input'/>
+                <label for='file'>
+                <FileIcon />
+                Choose a file
+                </label>
+                
+                <button className="submit" onClick={() => this.state.parent.uploadFile()}>Submit</button>
+                
             </div>
         );
     }
