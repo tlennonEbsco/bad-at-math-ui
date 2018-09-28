@@ -103,7 +103,8 @@ class FileWrapper extends React.Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        return this.state.files !== nextState.files;
+        return this.state.files !== nextState.files || 
+               this.state.status !== nextState.status;
     }
 
     clearStatus() {
