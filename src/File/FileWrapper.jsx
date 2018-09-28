@@ -13,12 +13,7 @@ class FileWrapper extends React.Component {
             status: null,
         }
     }
-/*
-    status: {
-        message: 'message',
-        type: 'type'
-    }
-*/
+
     fetchFiles() {
         fetch(`${this.props.route}/file`)
             .then(response => {
@@ -107,13 +102,9 @@ class FileWrapper extends React.Component {
         clearInterval(this.interval);
     }
 
-    // shouldComponentUpdate(nextProps) {
-    //     if (nextProps.files.length !== this.props.files.length) return true;
-
-    //     const setNextProps = new Set(nextProps.files);
-    //     var difference = [...new Set([...this.props.files].filter(x => !setNextProps.has(x)))];
-    //     return difference.length > 0 ? true : false;
-    // }
+    shouldComponentUpdate(nextProps, nextState) {
+        return this.state.files !== nextState.files;
+    }
 
     clearStatus() {
         this.setState({
