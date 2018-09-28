@@ -8,6 +8,7 @@ class FileWrapper extends React.Component {
             isLoading: true,
         }
     }
+
     fetchFiles() {
         fetch(`${this.props.route}/file`)
             .then(response => {
@@ -21,15 +22,18 @@ class FileWrapper extends React.Component {
             .catch(error => this.setState({ error, isLoading: false }));
     }
 
-    deleteFile(fileName) {
-        fetch(`${this.props.route}/file/${fileName}`)
+    deleteFile(fileName, route) {
+        fetch(`${route}/file/delete/${fileName}`)
             .then(response => {
                 if (response.ok) {
-
+                    console.log("successfully deleted the file.");
+                    this.fetchFiles();
                 } else {
-                    throw new Error('Something went wrong...');
+                    return response.json();
                 }
-            })
+            }).then(parseError => {
+                console.log(parseError);
+            });
     }
 
     componentDidMount() {
@@ -66,7 +70,7 @@ class FileWrapper extends React.Component {
             <div className='file-container'>
                 <h3 className='header'>Available Files:</h3>
                 {this.state.files.map(file =>
-                    <File name={file} route={this.props.route} key={file} />
+                    <File name={file} route={this.props.route} key={file} deleteFile={this} />
                 )}
             </div>
         );
