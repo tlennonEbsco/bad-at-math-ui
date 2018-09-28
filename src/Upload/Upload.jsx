@@ -17,7 +17,7 @@ class Upload extends React.Component {
         return (
             <div className='uploadContainer'>
                 <input className='file-picker' type='file' />
-                <button className="submit" onClick={() => this.state.parent.uploadFile()}>Submit</button>
+                <button className="submit" onClick={() => this.state.parent.validateAndUpload()}>Submit</button>
 
             </div>
         );

@@ -28,12 +28,12 @@ class FileWrapper extends React.Component {
     }
 
     deleteFile(fileName) {
-        fetch(`${this.state.route}/file/${fileName}`, {method: "DELETE"})
+        fetch(`${this.state.route}/file/${fileName}`, {method: 'DELETE'})
             .then(response => {
                 if (response.ok) {
                     this.setState({
                         status: {
-                            message: "successfully deleted the file.",
+                            message: `Successfully deleted the file: ${fileName}`,
                             type: 'info'
                         },
                     });
@@ -46,7 +46,7 @@ class FileWrapper extends React.Component {
             });
     }
 
-    uploadFile() {
+    validateAndUpload() {
         var input = document.querySelector('input[type="file"]')
 
         if(input.files.length === 0) {
@@ -61,7 +61,11 @@ class FileWrapper extends React.Component {
 
         var data = new FormData()
         data.append('sampleFile', input.files[0])
-    
+        
+        this.uploadFile(data);
+    }
+
+    uploadFile(data) {
         fetch(this.state.route + '/upload', {
           method: 'POST',
           body: data,
@@ -74,15 +78,16 @@ class FileWrapper extends React.Component {
                 }
             });
             this.fetchFiles();
-          } else {
-            this.setState({
-              status: {
-                  message: 'Unable to upload file.',
-                type: 'warning',
-              }
-            });
           }
-        }) //TODO: Missing error handlers.
+        }).catch(error => {
+            this.setState({
+                status: {
+                    message: 'Unable to upload file.',
+                  type: 'error',
+                }
+            });
+        });
+
     }
 
     componentDidMount() {
@@ -113,23 +118,26 @@ class FileWrapper extends React.Component {
         })
     }
 
-    render() {
-        let status;
+    createStatus() {
         if(this.state.status) {
-            status = <UploadStatus 
+            return <UploadStatus 
                 type={this.state.type} 
                 status={this.state.status} 
                 clearStatus={() => this.clearStatus()} 
                 fadeInterval={3000}
             />
         }
+        return null;
+    } 
+
+    render() {
+        let status = this.createStatus();
 
         if(this.state.isLoading) {
             return <p>Loading...</p>
         }
   
         return (
-            <div>
                 <div className='file-container'>
                     <h3 className='header'>Available Files:</h3>
                     {this.state.files.map(file =>
@@ -139,18 +147,17 @@ class FileWrapper extends React.Component {
                     <Upload route={this.state.route} parent={this}/>
 
 
-                <CSSTransitionGroup
-                    transitionName="example"
-                    transitionAppear={true}
-                    transitionAppearTimeout={500}
-                    transitionEnter={false}
-                    transitionLeave={true}
-                    transitionLeaveTimeout={500}>
-                    {status}       
-                </CSSTransitionGroup>
+                    <CSSTransitionGroup
+                        transitionName='example'
+                        transitionAppear={true}
+                        transitionAppearTimeout={500}
+                        transitionEnter={false}
+                        transitionLeave={true}
+                        transitionLeaveTimeout={500}>
+                        {status}       
+                    </CSSTransitionGroup>
 
                 </div>
-            </div>
         );
     }
 }
