@@ -1,12 +1,15 @@
 import React from 'react';
 import File from './File';
 import Upload from '../Upload/Upload';
+import UploadStatus from '../Message/Message';
+import { CSSTransitionGroup } from 'react-transition-group' // ES6
 
 class FileWrapper extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             isLoading: true,
+            route: this.props.route,
         }
     }
 
@@ -37,6 +40,39 @@ class FileWrapper extends React.Component {
             });
     }
 
+    uploadFile() {
+        var input = document.querySelector('input[type="file"]')
+
+        if(input.files.length === 0) {
+            this.setState({
+                status: 'Please select a file.',
+                type: 'error',
+            });
+            return;
+        }
+
+        var data = new FormData()
+        data.append('sampleFile', input.files[0])
+    
+        fetch(this.state.route + '/upload', {
+          method: 'POST',
+          body: data,
+        }).then(response => {
+          if(response.ok) {
+            this.setState({
+              status: 'Successfully uploaded file.',
+              type: 'info',
+            });
+            this.fetchFiles();
+          } else {
+            this.setState({
+              status: 'Unable to upload file.',
+              type: 'warning',
+            });
+          }
+        }) //TODO: Missing error handlers.
+    }
+
     componentDidMount() {
         this.setState({
             isLoading: true,
@@ -62,8 +98,24 @@ class FileWrapper extends React.Component {
     //     return difference.length > 0 ? true : false;
     // }
 
+    clearStatus() {
+        this.setState({
+            status: null
+        })
+    }
+
     render() {
-        
+        let status;
+        if(this.state.status) {
+            status = <UploadStatus 
+                type={this.state.type} 
+                status={this.state.status} 
+                clearStatus={() => this.clearStatus()} 
+                fade={true}
+                fadeInterval={3000}
+            />
+        }
+
         if(this.state.isLoading) {
             return <p>Loading...</p>
         }
@@ -76,7 +128,18 @@ class FileWrapper extends React.Component {
                         <File name={file} route={this.props.route} key={file} parent={this} />
                     )}
 
-                    <Upload route={this.state.route} />
+                    <Upload route={this.state.route} parent={this}/>
+
+
+                <CSSTransitionGroup
+                    transitionName="example"
+                    transitionAppear={true}
+                    transitionAppearTimeout={500}
+                    transitionEnter={false}
+                    transitionLeave={true}
+                    transitionLeaveTimeout={500}>
+                    {status}       
+                </CSSTransitionGroup>
 
                 </div>
             </div>
