@@ -1,6 +1,5 @@
 import React from 'react';
 import FileWrapper from './File/FileWrapper';
-import Upload from './Upload/Upload';
 import { bam }  from '../package.json'
 export const defaultRoute = 'http://localhost:3001';
 
@@ -27,8 +26,6 @@ class App extends React.Component {
       <div>
 
         <FileWrapper files={files} route={this.state.route}/>
-
-        <Upload route={this.state.route} />
         
       </div>
     );

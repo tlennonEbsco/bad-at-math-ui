@@ -1,5 +1,6 @@
 import React from 'react';
 import File from './File';
+import Upload from '../Upload/Upload';
 
 class FileWrapper extends React.Component {
     constructor(props) {
@@ -52,6 +53,7 @@ class FileWrapper extends React.Component {
     componentWillUnmount() {
         clearInterval(this.interval);
     }
+
     // shouldComponentUpdate(nextProps) {
     //     if (nextProps.files.length !== this.props.files.length) return true;
 
@@ -67,11 +69,16 @@ class FileWrapper extends React.Component {
         }
   
         return (
-            <div className='file-container'>
-                <h3 className='header'>Available Files:</h3>
-                {this.state.files.map(file =>
-                    <File name={file} route={this.props.route} key={file} deleteFile={this} />
-                )}
+            <div>
+                <div className='file-container'>
+                    <h3 className='header'>Available Files:</h3>
+                    {this.state.files.map(file =>
+                        <File name={file} route={this.props.route} key={file} parent={this} />
+                    )}
+
+                    <Upload route={this.state.route} />
+
+                </div>
             </div>
         );
     }
